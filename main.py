@@ -16,8 +16,15 @@ def menu(x):
             print('total time was : ', totalTime)
             with open('totalTimeFile.txt', 'a') as f:
                 f.write(str(totalTime) + '\n')
-    if(x == d): 
-        pass
+    if(x == 'd'): 
+        absoluteTime = 0
+        with open('totalTimeFile.txt', 'r') as f:
+            for line in f:
+                absoluteTime += int(line)
+        with open('totalTimeFile.txt', 'w') as s:
+            s.write('')
+        print(absoluteTime)
+    
         
 
 if __name__ == "__main__":
