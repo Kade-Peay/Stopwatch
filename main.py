@@ -36,13 +36,18 @@ def addTime():
 
 
 
-def menu(x):
+def choice(x):
     if(x == 'n'):
         timer()
     if(x == 'd'): 
         addTime()
 
 if __name__ == "__main__":
-    print('n for new, d for done with current project: ')
-    choice = input("choose: ")
-    menu(choice)
+    if(len(sys.argv) < 2):
+        print('Not enough arguments')
+        print('n for new, d for done with current project: ')
+    else:
+        try:
+            choice(sys.argv[1])
+        except:
+            raise TypeError
