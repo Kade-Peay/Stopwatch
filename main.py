@@ -4,32 +4,45 @@
 
 import time, sys
 
-def menu(x):
-    if(x == 'n'):
-        totalTime = 0
-        try:
-            while True:
-                time.sleep(1)
-                totalTime += 1
-                print(totalTime, end='\r', flush=True)
-        except KeyboardInterrupt:
-            print('total time was : ', totalTime)
-            with open('totalTimeFile.txt', 'a') as f:
-                f.write(str(totalTime) + '\n')
-    if(x == 'd'): 
-        absoluteTime = 0
-        with open('totalTimeFile.txt', 'r') as f:
-            for line in f:
-                absoluteTime += int(line)
+def timer():
+    totalTime = 0
+    try:
+        while True:
+            time.sleep(1)
+            totalTime += 1
+            print(totalTime, end='\r', flush=True)
+    except KeyboardInterrupt:
+        print('total time was : ', totalTime)
+        with open('totalTimeFile.txt', 'a') as f:
+            f.write(str(totalTime) + '\n')
+
+def convert(seconds): 
+    seconds = seconds % (24 * 3600) 
+    hour = seconds // 3600
+    seconds %= 3600
+    minutes = seconds // 60
+    seconds %= 60
+      
+    return "%d:%02d:%02d" % (hour, minutes, seconds) 
+
+def addTime():
+    absoluteTime = 0
+    with open('totalTimeFile.txt', 'r') as f:
+        for line in f:
+            absoluteTime += int(line)
         with open('totalTimeFile.txt', 'w') as s:
             s.write('')
-        print(absoluteTime)
-    
-        
+        print(convert(absoluteTime))
+
+
+
+def menu(x):
+    if(x == 'n'):
+        timer()
+    if(x == 'd'): 
+        addTime()
 
 if __name__ == "__main__":
     print('n for new, d for done with current project: ')
     choice = input("choose: ")
     menu(choice)
-
-# __main__()
