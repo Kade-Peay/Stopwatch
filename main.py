@@ -12,7 +12,7 @@ def timer():
             totalTime += 1
             print(totalTime, end='\r', flush=True)
     except KeyboardInterrupt:
-        print('total time was : ', totalTime)
+        print('total time was : ', convert(totalTime))
         with open('totalTimeFile.txt', 'a') as f:
             f.write(str(totalTime) + '\n')
 
