@@ -16,17 +16,12 @@ def timer():
         with open('totalTimeFile.txt', 'a') as f:
             f.write(str(totalTime) + '\n')
 
-def addTime():
-    absoluteTime = 0
-    with open('totalTimeFile.txt', 'r') as f:
-        for line in f:
-            absoluteTime += int(line)
-        with open('totalTimeFile.txt', 'w') as s:
-            s.write('')
-        print(convert(absoluteTime))
+def delete():
+    with open('totalTimeFile.txt', 'w') as s:
+        s.write('')
 
 
-def currentTime():
+def getTime():
     absoluteTime = 0
     with open('totalTimeFile.txt', 'r') as f:
         for line in f:
@@ -49,9 +44,10 @@ def choice(x):
     if(x == 'n'):
         timer()
     if(x == 'd'): 
-        addTime()
+        getTime()
+        delete()
     if(x == 'c'):
-        currentTime()
+        getTime()
 
 if __name__ == "__main__":
     if(len(sys.argv) < 2):
