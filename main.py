@@ -16,15 +16,6 @@ def timer():
         with open('totalTimeFile.txt', 'a') as f:
             f.write(str(totalTime) + '\n')
 
-def convert(seconds): 
-    seconds = seconds % (24 * 3600) 
-    hour = seconds // 3600
-    seconds %= 3600
-    minutes = seconds // 60
-    seconds %= 60
-      
-    return "%d:%02d:%02d" % (hour, minutes, seconds) 
-
 def addTime():
     absoluteTime = 0
     with open('totalTimeFile.txt', 'r') as f:
@@ -35,12 +26,32 @@ def addTime():
         print(convert(absoluteTime))
 
 
+def currentTime():
+    absoluteTime = 0
+    with open('totalTimeFile.txt', 'r') as f:
+        for line in f:
+            absoluteTime += int(line)
+        print(convert(absoluteTime))
+
+def convert(seconds): 
+    seconds = seconds % (24 * 3600) 
+    hour = seconds // 3600
+    seconds %= 3600
+    minutes = seconds // 60
+    seconds %= 60
+      
+    return "%d:%02d:%02d" % (hour, minutes, seconds) 
+
+
+
 
 def choice(x):
     if(x == 'n'):
         timer()
     if(x == 'd'): 
         addTime()
+    if(x == 'c'):
+        currentTime()
 
 if __name__ == "__main__":
     if(len(sys.argv) < 2):
